@@ -20,15 +20,10 @@ body {
         margin-top: 15px;
         text-align: center;
     }
-
-
     .mealClass img{
         border-radius: 20px 20px 0px  0px;
-        width: 350px;
-      
+        width: 350px;  
     }
-
-    
 #meal-details{
     border: 1px solid red;
     text-align: center;
