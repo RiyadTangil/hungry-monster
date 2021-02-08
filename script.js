@@ -1,10 +1,12 @@
 
 const mealInput = document.getElementById('search-text');
+const mealDetails = document.getElementById("meal-details");
 
 //###################get search result of meal#########################
 function getMeal() {
-    let mealDetails = document.getElementById("meal-details");
-    let mealDiv = document.getElementById("meal-div");
+   
+    let mealsDiv = document.getElementById('meal-div');
+
     const mealInputText = mealInput.value;
     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${mealInputText}`)
         .then(res => res.json())
@@ -13,35 +15,32 @@ function getMeal() {
 
     const displayMeals = meal => {
         if (meal.meals) {
-            mealDetails.style.display="none"
-
-            mealsDiv = document.getElementById('meal-div');
             meal.meals.forEach(mealList => {
                 const mealDiv = document.createElement('div');
                 mealDiv.className = "meal-container";
                 const mealInfo = `
-               <img onclick="mealDetails('${mealList.idMeal}')" src = "${mealList.strMealThumb}">
-                <h3 onclick="mealDetails('${mealList.idMeal}')">${mealList.strMeal}</h3>`
+               <img onclick="mealDetail('${mealList.idMeal}')" src = "${mealList.strMealThumb}">
+                <h3 onclick="mealDetail('${mealList.idMeal}')">${mealList.strMeal}</h3>`
                 mealDiv.innerHTML = mealInfo;
                 mealsDiv.appendChild(mealDiv);
+                mealDetails.innerHTML = ""
+                mealDetails.style.display = "none"
             });
         }
         else {
-           
+
             let html = `<h1>No meal found!</h1>`
             mealDetails.innerHTML = html;
+
             mealDetails.style.display = "block"
-            mealDiv.style.display="none"
-
-
+            let mealDiv = document.getElementById("meal-div");
+            mealDiv.innerHTML = ""
         }
-
-
     }
 }
 
 //################### get details info of meal######################
-const mealDetails = id => {
+const mealDetail = id => {
 
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
     fetch(url)
@@ -50,7 +49,7 @@ const mealDetails = id => {
 }
 
 const renderMealInfo = meal => {
-    const mealDetails = document.getElementById("meal-details");
+    
     meal = meal[0];
 
     let html = `
@@ -71,8 +70,7 @@ const renderMealInfo = meal => {
     `;
 
     mealDetails.innerHTML = html;
-    const mealInfoOpener = document.getElementById('meal-details');
-    mealInfoOpener.style.display = "block"
+    mealDetails.style.display = "block"
 
 }
 
