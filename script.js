@@ -16,7 +16,7 @@ function getMeal() {
             mealDiv.className = "mealClass";
 
             const mealInfo = `
-               <img onclick="mealDetails('${mealList.strMeal}')" src = "${mealList.strMealThumb}">
+               <img onclick="mealDetails('${mealList.idMeal}')" src = "${mealList.strMealThumb}">
                 <h3>${mealList.strMeal}</h3>`
             mealDiv.innerHTML = mealInfo;
             mealsDiv.appendChild(mealDiv);
@@ -30,7 +30,7 @@ function getMeal() {
 
 }
 const mealDetails = name => {
-    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772`
+    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${name}`
     fetch(url)
         .then(res => res.json())
         .then(data => renderMealInfo(data.meals))
@@ -42,7 +42,9 @@ const renderMealInfo = meal => {
     meal = meal[0];
 
     let html = `
+    <button onclick="displayNone()">x</button>
         <h2 class = "recipe-title">${meal.strMeal}</h2>
+        
         <p class = "recipe-category">${meal.strCategory}</p>
         <div class = "recipe-instruct">
             <h3>Instructions:</h3>
@@ -57,6 +59,11 @@ const renderMealInfo = meal => {
     `;
 
     mealInfo.innerHTML = html;
+
+}
+
+function displayNone() {
+    document.getElementById("meal-details").style.display = "none";
 }
 
 

@@ -13,24 +13,29 @@ body {
 .mealClass{ 
     border: 2px solid red;
     margin: 0 auto;
- 
     border-radius: 20px;
     }
-    .mealClass h3{
+.mealClass h3{
         margin-top: 15px;
         text-align: center;
     }
-    .mealClass img{
+.mealClass img{
         border-radius: 20px 20px 0px  0px;
         width: 350px;  
     }
-#meal-details{
+#meal-details {
     border: 1px solid red;
     text-align: center;
     padding: 20px;
      background-color: rgb(241, 211, 207);
      border-radius: 30px;
      margin: 20px 80px;
+}
+
+#meal-details button{
+    float: right ;
+
+
 }
 #meal-details img{
     width: 200px;
