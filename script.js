@@ -1,43 +1,38 @@
 
-const mealInput = document.getElementById('display-text');
-
+const mealInput = document.getElementById('search-text');
+//###################get search result of meal#########################
 function getMeal() {
     const mealInputText = mealInput.value;
     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${mealInputText}`)
         .then(res => res.json())
-        .then(data => displayMeal(data))
+        .then(data => displayMeals(data))
 
-    const displayMeal = meal => {
+    const displayMeals = meal => {
+
         mealsDiv = document.getElementById('meal-div');
-        meal.meals.forEach(mealList => {
-            console.log(mealList);
-
+        meal.meals.forEach(mealList => {    
             const mealDiv = document.createElement('div');
-            mealDiv.className = "mealClass";
-
+            mealDiv.className = "meal-container";
             const mealInfo = `
                <img onclick="mealDetails('${mealList.idMeal}')" src = "${mealList.strMealThumb}">
-                <h3>${mealList.strMeal}</h3>`
+                <h3 onclick="mealDetails('${mealList.idMeal}')">${mealList.strMeal}</h3>`
             mealDiv.innerHTML = mealInfo;
             mealsDiv.appendChild(mealDiv);
-
-
-
         });
-
     }
-
-
 }
-const mealDetails = name => {
-    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${name}`
+
+//################### get details info of meal######################
+const mealDetails = id => {
+
+    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
     fetch(url)
         .then(res => res.json())
         .then(data => renderMealInfo(data.meals))
 }
 
 const renderMealInfo = meal => {
-    const mealInfo = document.getElementById("meal-details");
+    const mealDetails = document.getElementById("meal-details");
     console.log(meal);
     meal = meal[0];
 
@@ -58,9 +53,13 @@ const renderMealInfo = meal => {
         </div>
     `;
 
-    mealInfo.innerHTML = html;
+    mealDetails.innerHTML = html;
+    const mealInfoOpener = document.getElementById('meal-details');
+    mealInfoOpener.style.display = "block"
 
 }
+
+//####################info remover########################
 
 function displayNone() {
     document.getElementById("meal-details").style.display = "none";

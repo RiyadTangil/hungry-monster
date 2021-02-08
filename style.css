@@ -10,16 +10,16 @@ body {
     grid-gap: 30px;
 }
 
-.mealClass{ 
+.meal-container{ 
     border: 2px solid red;
     margin: 0 auto;
     border-radius: 20px;
     }
-.mealClass h3{
+.meal-container h3{
         margin-top: 15px;
         text-align: center;
     }
-.mealClass img{
+.meal-container img{
         border-radius: 20px 20px 0px  0px;
         width: 350px;  
     }
@@ -30,6 +30,7 @@ body {
      background-color: rgb(241, 211, 207);
      border-radius: 30px;
      margin: 20px 80px;
+     display: none;
 }
 
 #meal-details button{
